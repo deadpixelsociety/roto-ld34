@@ -1,7 +1,6 @@
 package com.thedeadpixelsociety.ld34
 
 import com.badlogic.gdx.ApplicationAdapter
-<<<<<<< HEAD
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -41,31 +40,5 @@ class LD34Game() : ApplicationAdapter() {
     override fun dispose() {
         screenService.dispose()
         GameServices.dispose()
-=======
-
-class LD34Game() : ApplicationAdapter() {
-    override fun pause() {
-        super.pause()
-    }
-
-    override fun resize(width: Int, height: Int) {
-        super.resize(width, height)
-    }
-
-    override fun create() {
-        super.create()
-    }
-
-    override fun render() {
-        super.render()
-    }
-
-    override fun resume() {
-        super.resume()
-    }
-
-    override fun dispose() {
-        super.dispose()
->>>>>>> master
     }
 }
