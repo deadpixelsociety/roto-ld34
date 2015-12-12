@@ -6,8 +6,8 @@ import com.thedeadpixelsociety.ld34.LD34Game
 
 fun main(args: Array<String>) {
     val config = LwjglApplicationConfiguration().apply {
-        width = 1024
-        height = 720
+        width = 800
+        height = 600
         title = "Ludum Dare 34"
     }
 

@@ -1,55 +1,96 @@
 package com.thedeadpixelsociety.ld34.screens
 
+import com.badlogic.ashley.core.Engine
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.physics.box2d.*
-import com.badlogic.gdx.utils.viewport.FitViewport
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
+import com.badlogic.gdx.utils.viewport.ExtendViewport
+import com.badlogic.gdx.utils.viewport.Viewport
 import com.thedeadpixelsociety.ld34.GameServices
 import com.thedeadpixelsociety.ld34.TimeKeeper
+import com.thedeadpixelsociety.ld34.components.Box2DComponent
+import com.thedeadpixelsociety.ld34.graphics.Palette
+import com.thedeadpixelsociety.ld34.systems.Box2DSystem
+import com.thedeadpixelsociety.ld34.systems.RenderSystem
+import com.thedeadpixelsociety.ld34.systems.ScriptSystem
+import com.thedeadpixelsociety.ld34.systems.TagSystem
+import com.thedeadpixelsociety.ld34.using
+import com.thedeadpixelsociety.ld34.world.createEntitiesFromMapLayer
 import kotlin.properties.Delegates
 
-class LevelScreen() : GameScreenImpl() {
-    val batch by lazy { GameServices[SpriteBatch::class] }
+class LevelScreen(val levelName: String) : GameScreenImpl() {
+    companion object {
+        const val DEBUG_BOX2D = true
+        const val ROTATE_FACTOR = 200f
+    }
+
     val debugRenderer by lazy { GameServices[Box2DDebugRenderer::class] }
-    val renderer by lazy { GameServices[ShapeRenderer::class] }
     val camera = OrthographicCamera()
-    val viewport = FitViewport(100f, 100f, camera)
-    val world = World(Vector2(0f, 9.8f), false)
-    var player by Delegates.notNull<Body>()
+    var viewport by Delegates.notNull<Viewport>()
+    val engine = Engine()
 
     override fun show() {
-        val bodyDef = BodyDef()
-        bodyDef.position.set(50f, 50f)
-        bodyDef.type = BodyDef.BodyType.DynamicBody
+        camera.zoom = .3f
+        clearColor = Palette.COUP_DE_GRACE
 
-        player = world.createBody(bodyDef)
+        viewport = ExtendViewport(1600f, 1600f, camera)
+        engine.addSystem(TagSystem())
+        engine.addSystem(Box2DSystem(Vector2(0f, -100f)))
+        engine.addSystem(ScriptSystem())
+        engine.addSystem(RenderSystem(viewport))
 
-        val fixtureDef = FixtureDef()
-        fixtureDef.shape = CircleShape()
-        fixtureDef.shape.radius = 1f
-        fixtureDef.density = 1f
+        val loader = TmxMapLoader()
+        val map = loader.load("levels/$levelName.tmx")
 
-        player.createFixture(fixtureDef)
+        map.using {
+            val levelLayer = it.layers.get("level") ?: throw IllegalStateException("Layer 'level' not found.")
+            createEntitiesFromMapLayer(levelLayer, engine)
+        }
     }
 
     override fun resize(width: Int, height: Int) {
         viewport.update(width, height)
     }
 
+    override fun input() {
+        var direction = 0
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            direction--
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            direction++
+        }
+
+        if (direction != 0) {
+            val angle = ROTATE_FACTOR * direction * TimeKeeper.deltaTime
+
+            val system = engine.getSystem(Box2DSystem::class.java)
+            system.world.gravity = system.world.gravity.rotate(angle)
+            camera.rotate(angle, 0f, 0f, 1f)
+        }
+    }
+
     override fun update() {
-        world.step(TimeKeeper.deltaTime, 1, 1)
+        engine.update(TimeKeeper.deltaTime)
+        val player = engine.getSystem(TagSystem::class.java)["player"]
+        camera.position.set(player?.getComponent(Box2DComponent::class.java)?.body?.position ?: Vector2.Zero, 0f)
     }
 
     override fun draw() {
         super.draw()
 
-        viewport.apply()
-        debugRenderer.render(world, viewport.camera.projection)
+        engine.getSystem(RenderSystem::class.java).update(TimeKeeper.frameTime)
+
+        if (DEBUG_BOX2D) {
+            debugRenderer.render(engine.getSystem(Box2DSystem::class.java).world, viewport.camera.combined)
+        }
     }
 
     override fun dispose() {
-        world.dispose()
+        engine.systems.forEach { engine.removeSystem(it) }
     }
 }
