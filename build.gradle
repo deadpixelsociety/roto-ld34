@@ -57,5 +57,7 @@ project(":core") {
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:+"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:+"
     }
 }

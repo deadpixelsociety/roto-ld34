@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" backgroundcolor="#2a363b" nextobjectid="40">
+ <objectgroup color="#2a363b" name="level">
+  <object id="22" type="wall" x="464" y="944" width="192" height="16"/>
+  <object id="23" type="wall" x="448" y="944" width="16" height="160"/>
+  <object id="24" type="wall" x="656" y="944" width="16" height="160"/>
+  <object id="25" name="player" x="480" y="976" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="28" type="wall" x="576" y="992" width="80" height="16"/>
+  <object id="29" name="goal" x="624" y="960" width="32" height="32"/>
+  <object id="39" type="wall" x="464" y="1072" width="192" height="32"/>
+ </objectgroup>
+</map>

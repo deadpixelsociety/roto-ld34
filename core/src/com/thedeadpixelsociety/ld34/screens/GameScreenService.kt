@@ -61,7 +61,7 @@ class GameScreenService() : Disposable {
     }
 
     fun resume() {
-        screens.forEach { resume() }
+        screens.forEach { it.resume() }
     }
 
     override fun dispose() {
