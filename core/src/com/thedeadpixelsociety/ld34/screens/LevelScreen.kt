@@ -24,8 +24,8 @@ import kotlin.properties.Delegates
 
 class LevelScreen(val levelName: String) : GameScreenImpl() {
     companion object {
-        const val DEBUG_BOX2D = true
-        const val GRAVITY_STRENGTH = 175f
+        const val DEBUG_BOX2D = false
+        const val GRAVITY_STRENGTH = -175f
         const val ROTATE_FACTOR = 150f
         const val TRANSITION_OUT_DELAY = .5f
         const val TRANSITION_TIME = 1f
@@ -46,19 +46,24 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
     override fun show() {
         clearColor = Palette.COUP_DE_GRACE
 
-        viewport = ExtendViewport(1000f, 1000f)
+        val loader = TmxMapLoader()
+        val map = loader.load("levels/$levelName.tmx")
+        val w = map.properties["width"] as Int
+        val h = map.properties["height"] as Int
+        val tw = map.properties["tilewidth"] as Int
+        val th = map.properties["tileheight"] as Int
+        val gravity = if (map.properties.containsKey("gravity")) (map.properties["gravity"] as String).toFloat() else GRAVITY_STRENGTH
+
+        viewport = ExtendViewport((w * tw).toFloat(), (h * th).toFloat())
         camera = viewport.camera as OrthographicCamera
         camera.zoom = .3f
 
         viewport.update(Gdx.graphics.width, Gdx.graphics.height)
 
         engine.addSystem(TagSystem())
-        engine.addSystem(Box2DSystem(Vector2(0f, -GRAVITY_STRENGTH)))
+        engine.addSystem(Box2DSystem(Vector2(0f, gravity)))
         engine.addSystem(ScriptSystem())
         engine.addSystem(RenderSystem(viewport))
-
-        val loader = TmxMapLoader()
-        val map = loader.load("levels/$levelName.tmx")
 
         map.using {
             val levelLayer = it.layers.get("level") ?: throw IllegalStateException("Layer 'level' not found.")
