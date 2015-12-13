@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component
 
 enum class RenderShape {
     CIRCLE,
+    LINE,
     RECTANGLE,
     POLYGON
 }

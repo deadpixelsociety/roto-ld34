@@ -4,10 +4,13 @@ import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.EntitySystem
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
 import com.thedeadpixelsociety.ld34.components.Box2DComponent
+import com.thedeadpixelsociety.ld34.components.DeadComponent
 import com.thedeadpixelsociety.ld34.components.TransformComponent
+import com.thedeadpixelsociety.ld34.has
 
 class Box2DSystem(private val gravity: Vector2) : EntitySystem() {
     private val box2dMapper = ComponentMapper.getFor(Box2DComponent::class.java)
@@ -20,7 +23,7 @@ class Box2DSystem(private val gravity: Vector2) : EntitySystem() {
                 val entityA = contact?.fixtureA?.body?.userData as? Entity
                 val entityB = contact?.fixtureB?.body?.userData as? Entity
 
-                if (entityA != null) {
+                if (entityA != null && !entityA.has(DeadComponent::class.java)) {
                     val box2d = box2dMapper.get(entityA)
                     if (box2d != null) {
                         box2d.collision = true
@@ -28,7 +31,7 @@ class Box2DSystem(private val gravity: Vector2) : EntitySystem() {
                     }
                 }
 
-                if (entityB != null) {
+                if (entityB != null && !entityB.has(DeadComponent::class.java)) {
                     val box2d = box2dMapper.get(entityB)
                     if (box2d != null) {
                         box2d.collision = true
@@ -78,7 +81,7 @@ class Box2DSystem(private val gravity: Vector2) : EntitySystem() {
                 val transform = transformMapper.get(entity)
                 if (transform != null) {
                     transform.position.set(it.position)
-                    transform.rotation = it.angle
+                    transform.rotation = -it.angle * MathUtils.radiansToDegrees
                 }
             }
         }

@@ -27,11 +27,13 @@ class GameScreenService() : Disposable {
 
     private fun update() {
         var top = true
-        for (i in screens.size - 1..0) {
-            val screen = screens[i]
+        for (i in 0..screens.size - 1) {
+            val screen = screens[screens.size - 1 - i]
 
-            screen.input()
-            screen.update()
+            if (top) {
+                screen.input()
+                screen.update()
+            }
 
             if (!top) remove(screen)
             if (!screen.overlay) top = false

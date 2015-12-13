@@ -4,8 +4,11 @@ import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.systems.SortedIteratingSystem
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.thedeadpixelsociety.ld34.GameServices
 import com.thedeadpixelsociety.ld34.components.*
@@ -21,6 +24,14 @@ class RenderSystem(private val viewport: Viewport) : SortedIteratingSystem(Rende
     private val tintMapper = ComponentMapper.getFor(TintComponent::class.java)
     private val transformMapper = ComponentMapper.getFor(TransformComponent::class.java)
     private val renderer by lazy { GameServices[ShapeRenderer::class] }
+    private var shadows = false
+    var angle = 0f
+        get
+        set(value) {
+            field = value
+            shadowOffset.rotate(value)
+        }
+    var shadowOffset = Vector2(2.5f, -2.5f)
 
     override fun checkProcessing() = false
 
@@ -30,20 +41,32 @@ class RenderSystem(private val viewport: Viewport) : SortedIteratingSystem(Rende
         val transform = transformMapper.get(entity)!!
         val tint = tintMapper.get(entity)
 
-        renderer.color = tint?.color ?: Color.WHITE
+        val color = Color(tint?.color ?: Color.WHITE)
+        color.a = .5f
+        renderer.color = color
 
         when (render.shape) {
             RenderShape.CIRCLE -> {
-                renderer.circle(transform.position.x, transform.position.y, bounds.rect.width * .5f)
+                renderer.circle(transform.position.x,
+                        transform.position.y,
+                        bounds.rect.width * .5f, 64)
             }
             RenderShape.RECTANGLE -> {
-                renderer.rect(transform.position.x - bounds.rect.width * .5f,
-                        transform.position.y - bounds.rect.height * .5f,
+                renderer.rect(transform.position.x + (if (shadows) shadowOffset.x else 0f) - bounds.rect.width * .5f,
+                        transform.position.y + (if (shadows) shadowOffset.y else 0f) - bounds.rect.height * .5f,
+                        transform.position.x,
+                        transform.position.y,
                         bounds.rect.width,
-                        bounds.rect.height)
+                        bounds.rect.height,
+                        transform.scale.x,
+                        transform.scale.y,
+                        transform.rotation)
             }
             RenderShape.POLYGON -> {
                 throw UnsupportedOperationException()
+            }
+            RenderShape.LINE -> {
+                renderer.line(transform.position.x + (if (shadows) shadowOffset.x else 0f), transform.position.y + (if (shadows) shadowOffset.y else 0f), bounds.rect.width, bounds.rect.height)
             }
         }
 
@@ -52,7 +75,15 @@ class RenderSystem(private val viewport: Viewport) : SortedIteratingSystem(Rende
     }
 
     override fun update(deltaTime: Float) {
+        Gdx.gl20.glEnable(GL20.GL_BLEND)
+        Gdx.gl20.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
         begin()
+        shadows = true
+        super.update(deltaTime)
+        end()
+        Gdx.gl20.glDisable(GL20.GL_BLEND)
+        begin()
+        shadows = false
         super.update(deltaTime)
         end()
     }

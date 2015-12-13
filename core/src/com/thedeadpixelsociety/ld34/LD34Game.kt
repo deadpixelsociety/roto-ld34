@@ -17,8 +17,9 @@ class LD34Game() : ApplicationAdapter() {
         GameServices.put(ShapeRenderer())
         GameServices.put(SpriteBatch())
         GameServices.put(Box2DDebugRenderer())
+        GameServices.put(screenService)
 
-        screenService.push(LevelScreen("0"))
+        screenService.push(LevelScreen("3"))
     }
 
     override fun resize(width: Int, height: Int) {
