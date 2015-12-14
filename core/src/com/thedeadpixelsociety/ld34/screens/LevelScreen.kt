@@ -1,12 +1,15 @@
 package com.thedeadpixelsociety.ld34.screens
 
 import com.badlogic.ashley.core.Engine
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.math.Interpolation
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
 import com.badlogic.gdx.utils.Timer
@@ -16,32 +19,37 @@ import com.thedeadpixelsociety.ld34.*
 import com.thedeadpixelsociety.ld34.components.Box2DComponent
 import com.thedeadpixelsociety.ld34.components.TransformComponent
 import com.thedeadpixelsociety.ld34.graphics.Palette
-import com.thedeadpixelsociety.ld34.systems.Box2DSystem
-import com.thedeadpixelsociety.ld34.systems.RenderSystem
-import com.thedeadpixelsociety.ld34.systems.ScriptSystem
-import com.thedeadpixelsociety.ld34.systems.TagSystem
+import com.thedeadpixelsociety.ld34.systems.*
 import kotlin.properties.Delegates
 
 class LevelScreen(val levelName: String) : GameScreenImpl() {
     companion object {
         const val DEBUG_BOX2D = false
-        const val GRAVITY_STRENGTH = -175f
+        const val GRAVITY_STRENGTH = -125f
         const val ROTATE_FACTOR = 150f
         const val TRANSITION_OUT_DELAY = .5f
         const val TRANSITION_TIME = 1f
     }
 
-    val debugRenderer by lazy { GameServices[Box2DDebugRenderer::class] }
-    val renderer by lazy { GameServices[ShapeRenderer::class] }
-    var camera by Delegates.notNull<OrthographicCamera>()
-    val uiCamera = OrthographicCamera()
-    var viewport by Delegates.notNull<Viewport>()
-    val engine = Engine()
-    var transitionOut = false
-    var transitionIn = true
-    val transitionFrom = Vector2()
-    var transitionRadius = 0f
-    var finished = false
+    private val batch by lazy { GameServices[SpriteBatch::class] }
+    private val debugRenderer by lazy { GameServices[Box2DDebugRenderer::class] }
+    private val renderer by lazy { GameServices[ShapeRenderer::class] }
+    private var camera by Delegates.notNull<OrthographicCamera>()
+    private val uiCamera = OrthographicCamera()
+    private var viewport by Delegates.notNull<Viewport>()
+    private val engine = Engine()
+    private var transitionOut = false
+    private var transitionIn = true
+    private val transitionFrom = Vector2()
+    private var transitionRadius = 0f
+    private var finished = false
+    private var totalCoins = 0
+    private var collectedCoins = 0
+    private var rotation = 0f
+    private val lastCameraPos = Vector2()
+    private var lastWallHit = 0f
+    private var lastCoin = 0f
+    private var musicMuted = false
 
     override fun show() {
         clearColor = Palette.COUP_DE_GRACE
@@ -62,11 +70,14 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
 
         engine.addSystem(TagSystem())
         engine.addSystem(Box2DSystem(Vector2(0f, gravity)))
+        engine.addSystem(AnimationSystem())
         engine.addSystem(ScriptSystem())
         engine.addSystem(RenderSystem(viewport))
 
         map.using {
             val levelLayer = it.layers.get("level") ?: throw IllegalStateException("Layer 'level' not found.")
+
+            totalCoins = levelLayer.objects.filter { it.properties.containsKey("type") && it.properties["type"] == Entities.TYPE_COIN }.count()
             createEntitiesFromMapLayer(levelLayer, engine)
         }
 
@@ -86,10 +97,45 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
 
         Events.goal = { onGoal() }
         Events.dead = { onDead() }
+        Events.coin = { coin, player -> onCoin(coin, player) }
+        Events.wall = { wall, player -> onWall(wall, player) }
+    }
+
+    private fun onWall(wall: Entity, player: Entity) {
+        val box2d = player.getComponent(Box2DComponent::class.java)
+        if (box2d != null && box2d.body != null) {
+            val speed = box2d.body!!.linearVelocity.len()
+            if (speed > 10f && (TimeKeeper.totalTime - lastWallHit) > .2f) {
+                lastWallHit = TimeKeeper.totalTime
+                if (!Sounds.soundMuted) Sounds.bounce.play(.5f, 1f + (MathUtils.random(-.2f, .3f)), 0f)
+            }
+        }
+    }
+
+    private var lastPitch = 0f
+
+    private fun onCoin(coin: Entity, player: Entity) {
+        engine.removeEntity(coin)
+        collectedCoins++
+
+        if ((TimeKeeper.totalTime - lastCoin) > .1f) {
+            var pitch = 0f
+            if ((TimeKeeper.totalTime - lastCoin) < .5f) {
+                pitch = Math.min(lastPitch + .1f, 1.8f)
+            } else {
+                pitch = 1f + (MathUtils.random(-.2f, .3f))
+            }
+
+            if (!Sounds.soundMuted) Sounds.coin.play(.5f, lastPitch, 0f)
+
+
+            lastPitch = pitch
+            lastCoin = TimeKeeper.totalTime
+        }
     }
 
     private fun onDead() {
-        println("fucking dead m8")
+        if (!Sounds.soundMuted) Sounds.dead.play(.8f, 1f + (MathUtils.random(-.2f, .3f)), 0f)
         LevelManager.retry()
     }
 
@@ -116,6 +162,15 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
 
     override fun input() {
         if (!transitionOut && !transitionIn) {
+            if (Gdx.input.isKeyPressed(Input.Keys.M)) {
+                musicMuted = !musicMuted
+                if (!musicMuted) Sounds.music.play() else Sounds.music.stop()
+            }
+
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                Sounds.soundMuted = !Sounds.soundMuted
+            }
+
             var direction = 0
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 direction--
@@ -128,6 +183,8 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
             if (direction != 0) {
                 val angle = ROTATE_FACTOR * direction * TimeKeeper.deltaTime
                 engine.getSystem(RenderSystem::class.java).angle = angle
+                rotation = (360f + (rotation + angle)) % 360f
+                engine.getSystem(RenderSystem::class.java).rotation = rotation
 
                 val system = engine.getSystem(Box2DSystem::class.java)
                 system.world.gravity = system.world.gravity.rotate(angle)
@@ -137,8 +194,19 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
     }
 
     override fun update() {
+        // Kill camera jitter
         val player = engine.getSystem(TagSystem::class.java)["player"]
-        camera.position.set(player?.getComponent(Box2DComponent::class.java)?.body?.position ?: Vector2.Zero, 0f)
+        if (player != null) {
+            val box2d = player.getComponent(Box2DComponent::class.java)
+            if (box2d != null && box2d.body != null) {
+                val position = box2d.body!!.position
+                val dst = position.dst(lastCameraPos)
+                if (dst > .1f) {
+                    camera.position.set(position, 0f)
+                    lastCameraPos.set(position)
+                }
+            }
+        }
 
         if (!transitionOut && !transitionIn) {
             engine.update(TimeKeeper.deltaTime)
@@ -169,6 +237,17 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
             renderTransition(1)
         } else if (transitionIn) {
             renderTransition(-1)
+        } else {
+            drawUI()
+        }
+    }
+
+    private fun drawUI() {
+        if (totalCoins > 0) {
+            batch.projectionMatrix = uiCamera.combined
+            batch.begin()
+            Fonts.font32.draw(batch, "Coins: $collectedCoins/$totalCoins", 8f, 32f)
+            batch.end()
         }
     }
 

@@ -2,11 +2,12 @@ package com.thedeadpixelsociety.ld34.components
 
 import com.badlogic.ashley.core.Component
 
-enum class RenderShape {
+enum class RenderType {
     CIRCLE,
     LINE,
     RECTANGLE,
-    POLYGON
+    POLYGON,
+    TEXT
 }
 
-data class RenderComponent(val shape: RenderShape, val zOrder: Float = .5f) : Component
+data class RenderComponent(val type: RenderType, val zOrder: Float = .5f) : Component

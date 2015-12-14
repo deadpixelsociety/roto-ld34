@@ -3,9 +3,12 @@ package com.thedeadpixelsociety.ld34
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
+import com.badlogic.gdx.utils.Timer
 import com.thedeadpixelsociety.ld34.screens.GameScreenService
 import com.thedeadpixelsociety.ld34.screens.LevelScreen
 
@@ -13,13 +16,41 @@ class LD34Game() : ApplicationAdapter() {
     val screenService = GameScreenService()
 
     override fun create() {
+        createFonts()
+        loadSounds()
+
         GameServices.put(AssetManager())
         GameServices.put(ShapeRenderer())
         GameServices.put(SpriteBatch())
         GameServices.put(Box2DDebugRenderer())
         GameServices.put(screenService)
 
-        screenService.push(LevelScreen("0"))
+        Sounds.music.isLooping = true
+        Sounds.music.volume = .3f
+        Sounds.music.play()
+
+        Timer.schedule(object : Timer.Task() {
+            override fun run() {
+                screenService.push(LevelScreen("-1"))
+            }
+        }, 1f)
+    }
+
+    private fun loadSounds() {
+        Sounds.music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.wav"))
+        Sounds.coin = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"))
+        Sounds.bounce = Gdx.audio.newSound(Gdx.files.internal("sounds/bounce.wav"))
+        Sounds.dead = Gdx.audio.newSound(Gdx.files.internal("sounds/dead.wav"))
+    }
+
+    private fun createFonts() {
+        val gen = FreeTypeFontGenerator(Gdx.files.internal("fonts/PrintClearly.otf"))
+        Fonts.font32 = gen.generateFont(FreeTypeFontGenerator.FreeTypeFontParameter().apply {
+            size = 32
+            color = Color.WHITE
+        })
+
+        gen.dispose()
     }
 
     override fun resize(width: Int, height: Int) {
@@ -41,5 +72,7 @@ class LD34Game() : ApplicationAdapter() {
     override fun dispose() {
         screenService.dispose()
         GameServices.dispose()
+        Fonts.font32.dispose()
+        Sounds.dispose()
     }
 }

@@ -4,14 +4,14 @@ import com.thedeadpixelsociety.ld34.screens.GameScreenService
 import com.thedeadpixelsociety.ld34.screens.LevelScreen
 
 object LevelManager {
-    const val MAX_LEVELS = 2
+    const val MAX_LEVEL = 6
     var currentLevel = 0
         get
         private set
 
     fun next() {
         currentLevel++
-        if (currentLevel > MAX_LEVELS) currentLevel = 0
+        if (currentLevel > MAX_LEVEL) currentLevel = 0
 
         GameServices[GameScreenService::class].push(LevelScreen("$currentLevel"))
     }

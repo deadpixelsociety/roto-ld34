@@ -26,6 +26,8 @@ class GameScreenService() : Disposable {
     }
 
     private fun update() {
+        if (screens.size == 0) return
+
         var top = true
         for (i in 0..screens.size - 1) {
             val screen = screens[screens.size - 1 - i]
