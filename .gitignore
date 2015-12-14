@@ -60,3 +60,4 @@ crashlytics.properties
 crashlytics-build.properties
 
 core/build/
+desktop/build/

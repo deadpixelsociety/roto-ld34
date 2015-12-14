@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="65" height="65" tilewidth="16" tileheight="16" backgroundcolor="#2a363b" nextobjectid="118">
+ <objectgroup color="#2a363b" name="level">
+  <object id="22" type="wall" x="352" y="528" width="336" height="16"/>
+  <object id="23" type="wall" x="336" y="528" width="16" height="144"/>
+  <object id="25" name="player" x="357.333" y="636" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="29" name="goal" x="656" y="544" width="32" height="32"/>
+  <object id="39" type="wall" x="352" y="656" width="112" height="16"/>
+  <object id="41" type="wall" x="576" y="656" width="112" height="16"/>
+  <object id="42" type="wall" x="464" y="656" width="16" height="64"/>
+  <object id="43" type="wall" x="560" y="656" width="16" height="64"/>
+  <object id="45" type="wall" x="688" y="528" width="16" height="144"/>
+  <object id="46" type="wall" x="576" y="576" width="112" height="16"/>
+  <object id="47" type="hazard" x="489" y="720.12">
+   <polyline points="0,0 10,-39.125"/>
+  </object>
+  <object id="49" type="hazard" x="508.5" y="720.5">
+   <polyline points="0,0 -21.5,-48"/>
+  </object>
+  <object id="50" type="hazard" x="517.5" y="720.12">
+   <polyline points="0,0 12,-51.625"/>
+  </object>
+  <object id="51" type="hazard" x="546" y="720.25">
+   <polyline points="0,0 -29.5,-26.75"/>
+  </object>
+  <object id="52" type="hazard" x="526.5" y="720.25">
+   <polyline points="0,0 22,-41.75"/>
+  </object>
+  <object id="53" type="hazard" x="558" y="720">
+   <polyline points="0,0 -16,-47"/>
+  </object>
+  <object id="56" type="hazard" x="514.5" y="720.25">
+   <polyline points="0,0 -6,-45.25"/>
+  </object>
+  <object id="57" type="hazard" x="496.5" y="720.25">
+   <polyline points="0,0 37.5,-34"/>
+  </object>
+  <object id="58" type="hazard" x="485.5" y="720">
+   <polyline points="0,0 3,-35"/>
+  </object>
+  <object id="60" type="hazard" x="551.5" y="720.12">
+   <polyline points="0,0 -3.5,-55.125"/>
+  </object>
+  <object id="61" type="hazard" x="535.375" y="720.12">
+   <polyline points="0,0 -30.5,-52.75"/>
+  </object>
+  <object id="64" type="hazard" x="357" y="544.75">
+   <polyline points="0,0 3.5,13.25"/>
+  </object>
+  <object id="65" type="hazard" x="366.5" y="544.5">
+   <polyline points="0,0 -9,10.5"/>
+  </object>
+  <object id="66" type="hazard" x="361.25" y="544">
+   <polyline points="0,0 10.25,14.5"/>
+  </object>
+  <object id="67" type="hazard" x="384" y="543">
+   <polyline points="0,0 -11.25,18"/>
+  </object>
+  <object id="68" type="hazard" x="372.75" y="539.75">
+   <polyline points="0,0 22,21.75"/>
+  </object>
+  <object id="69" type="hazard" x="403.75" y="542.25">
+   <polyline points="0,0 -2,17"/>
+  </object>
+  <object id="72" type="hazard" x="411.25" y="542">
+   <polyline points="0,0 3.75,22.75"/>
+  </object>
+  <object id="73" type="hazard" x="393.25" y="541">
+   <polyline points="0,0 5.5,21.25"/>
+  </object>
+  <object id="74" type="hazard" x="425.5" y="543">
+   <polyline points="0,0 2.25,12.75"/>
+  </object>
+  <object id="88" type="hazard" x="443" y="544">
+   <polyline points="0,0 -5.5,17.5"/>
+  </object>
+  <object id="90" type="hazard" x="432.25" y="543.25">
+   <polyline points="0,0 -3,23.75"/>
+  </object>
+  <object id="91" type="hazard" x="417" y="540">
+   <polyline points="0,0 6.25,28.25"/>
+  </object>
+  <object id="92" type="hazard" x="398" y="542.75">
+   <polyline points="0,0 12.75,21.5"/>
+  </object>
+  <object id="93" type="hazard" x="389.25" y="543.5">
+   <polyline points="0,0 -5,19.75"/>
+  </object>
+  <object id="95" type="hazard" x="689.75" y="594.75">
+   <polyline points="0,0 -15.75,6.75"/>
+  </object>
+  <object id="96" type="hazard" x="689" y="609.25">
+   <polyline points="0,0 -13.25,-10.75"/>
+  </object>
+  <object id="98" type="hazard" x="695.75" y="623.75">
+   <polyline points="0,0 -22.5,3.5"/>
+  </object>
+  <object id="99" type="hazard" x="691.25" y="641">
+   <polyline points="0,0 -14.75,-25.75"/>
+  </object>
+  <object id="100" type="hazard" x="693.5" y="646.25">
+   <polyline points="0,0 -21,1.25"/>
+  </object>
+  <object id="101" type="hazard" x="691.5" y="652.25">
+   <polyline points="0,0 -19.5,-10.5"/>
+  </object>
+  <object id="102" type="hazard" x="691.75" y="627.75">
+   <polyline points="0,0 -18,8"/>
+  </object>
+  <object id="103" type="hazard" x="692.75" y="615">
+   <polyline points="0,0 -23.75,-6.5"/>
+  </object>
+  <object id="104" type="wall" x="464" y="720" width="112" height="16"/>
+  <object id="105" type="text" x="336" y="496" width="256" height="32">
+   <properties>
+    <property name="text" value="Temperance"/>
+   </properties>
+  </object>
+  <object id="109" type="coin" x="496" y="608" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="110" type="coin" x="528" y="608" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="112" type="coin" x="512" y="624" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="113" type="coin" x="358.333" y="575.667" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="115" type="coin" x="622.333" y="603.125" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="116" type="wall" x="640" y="592" width="16" height="32"/>
+  <object id="117" type="coin" x="512" y="592" width="8" height="8">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

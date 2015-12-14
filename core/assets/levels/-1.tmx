@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="65" height="65" tilewidth="16" tileheight="16" backgroundcolor="#2a363b" nextobjectid="47">
+ <objectgroup color="#2a363b" name="level">
+  <object id="22" type="wall" x="432" y="576" width="192" height="16"/>
+  <object id="23" type="wall" x="416" y="576" width="16" height="96"/>
+  <object id="25" name="player" x="448" y="608" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="29" name="goal" x="608" y="624" width="16" height="32"/>
+  <object id="39" type="wall" x="432" y="656" width="192" height="16"/>
+  <object id="43" type="wall" x="624" y="576" width="16" height="96"/>
+  <object id="44" type="text" x="416" y="680" width="256" height="32">
+   <properties>
+    <property name="text" value="@deadpxlsociety"/>
+   </properties>
+  </object>
+  <object id="46" type="text" x="416" y="544" width="256" height="32">
+   <properties>
+    <property name="text" value="Roto :: #LD34"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
