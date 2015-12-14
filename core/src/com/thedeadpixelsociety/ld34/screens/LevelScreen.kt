@@ -119,15 +119,12 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
         collectedCoins++
 
         if ((TimeKeeper.totalTime - lastCoin) > .1f) {
-            var pitch = 0f
-            if ((TimeKeeper.totalTime - lastCoin) < .5f) {
+            var pitch = 1f + (MathUtils.random(-.2f, .3f))
+            if ((TimeKeeper.totalTime - lastCoin) < .5f && lastPitch != 0f) {
                 pitch = Math.min(lastPitch + .1f, 1.8f)
-            } else {
-                pitch = 1f + (MathUtils.random(-.2f, .3f))
             }
 
-            if (!Sounds.soundMuted) Sounds.coin.play(.5f, lastPitch, 0f)
-
+            if (!Sounds.soundMuted) Sounds.coin.play(.5f, pitch, 0f)
 
             lastPitch = pitch
             lastCoin = TimeKeeper.totalTime

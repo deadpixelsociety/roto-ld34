@@ -11,10 +11,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.physics.box2d.*
 import com.thedeadpixelsociety.ld34.components.*
 import com.thedeadpixelsociety.ld34.graphics.Palette
-import com.thedeadpixelsociety.ld34.scripts.CoinScript
-import com.thedeadpixelsociety.ld34.scripts.GoalScript
-import com.thedeadpixelsociety.ld34.scripts.HazardScript
-import com.thedeadpixelsociety.ld34.scripts.WallScript
+import com.thedeadpixelsociety.ld34.scripts.*
 import com.thedeadpixelsociety.ld34.systems.Box2DSystem
 
 object Entities {
@@ -181,6 +178,7 @@ object Entities {
             position.set(data.cx, data.cy)
             type = BodyDef.BodyType.DynamicBody
             bullet = true
+            gravityScale = .5f
         })
 
         PolygonShape().apply { setAsBox(data.w * .5f, data.h * .5f) }.using {
@@ -202,7 +200,7 @@ object Entities {
                 .add(RenderComponent(RenderType.RECTANGLE))
                 .add(TintComponent(Color(Palette.COMPLETE_CORAL)))
                 .add(ScriptComponent().apply {
-                    scripts.add(HazardScript())
+                    scripts.add(WeightScript())
                 })
 
         body.userData = entity
