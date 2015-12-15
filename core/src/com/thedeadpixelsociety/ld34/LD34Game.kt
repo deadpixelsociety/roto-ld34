@@ -3,6 +3,7 @@ package com.thedeadpixelsociety.ld34
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.audio.Music
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
@@ -25,10 +26,6 @@ class LD34Game() : ApplicationAdapter() {
         GameServices.put(Box2DDebugRenderer())
         GameServices.put(screenService)
 
-        Sounds.music.isLooping = true
-        Sounds.music.volume = .3f
-        Sounds.music.play()
-
         Timer.schedule(object : Timer.Task() {
             override fun run() {
                 screenService.push(LevelScreen("-1"))
@@ -37,7 +34,6 @@ class LD34Game() : ApplicationAdapter() {
     }
 
     private fun loadSounds() {
-        Sounds.music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.wav"))
         Sounds.coin = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"))
         Sounds.bounce = Gdx.audio.newSound(Gdx.files.internal("sounds/bounce.wav"))
         Sounds.dead = Gdx.audio.newSound(Gdx.files.internal("sounds/dead.wav"))

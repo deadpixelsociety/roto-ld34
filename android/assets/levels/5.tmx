@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="130" tilewidth="8" tileheight="8" backgroundcolor="#2a363b" nextobjectid="271">
+ <objectgroup color="#2a363b" name="level">
+  <object id="25" name="player" x="256" y="744" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="29" name="goal" x="64" y="456" width="32" height="32"/>
+  <object id="118" type="wall" x="64" y="776" width="400.043" height="16"/>
+  <object id="119" type="wall" x="48" y="440" width="96" height="16"/>
+  <object id="130" type="wall" x="464" y="712" width="16" height="80"/>
+  <object id="137" type="text" x="160" y="664" width="320" height="32">
+   <properties>
+    <property name="text" value="That Looks Heavy"/>
+   </properties>
+  </object>
+  <object id="153" type="wall" x="48" y="456" width="16" height="335.938"/>
+  <object id="178" type="wall" x="128" y="456" width="16" height="240"/>
+  <object id="252" type="wall" x="64" y="488" width="32" height="16"/>
+  <object id="253" type="hazard" x="426.375" y="728.375" width="32" height="32"/>
+  <object id="254" type="coin" x="400" y="744" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="255" type="coin" x="304" y="744" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="256" type="coin" x="328" y="736" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="257" type="coin" x="280" y="736" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="258" type="coin" x="352" y="744" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="259" type="coin" x="376" y="736" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="260" type="wall" x="128" y="696" width="352" height="16"/>
+  <object id="261" type="coin" x="80" y="728" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="262" type="coin" x="104" y="736" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="263" type="coin" x="80" y="680" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="264" type="coin" x="104" y="688" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="265" type="coin" x="80" y="632" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="266" type="coin" x="104" y="640" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="267" type="coin" x="80" y="584" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="268" type="coin" x="104" y="592" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="269" type="coin" x="80" y="536" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="270" type="coin" x="104" y="544" width="8" height="8">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

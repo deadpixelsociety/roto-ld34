@@ -161,7 +161,7 @@ class LevelScreen(val levelName: String) : GameScreenImpl() {
         if (!transitionOut && !transitionIn) {
             if (Gdx.input.isKeyPressed(Input.Keys.M)) {
                 musicMuted = !musicMuted
-                if (!musicMuted) Sounds.music.play() else Sounds.music.stop()
+                //if (!musicMuted) Sounds.music.play() else Sounds.music.stop()
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {

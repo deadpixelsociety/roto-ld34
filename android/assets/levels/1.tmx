@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="65" height="65" tilewidth="16" tileheight="16" backgroundcolor="#2a363b" nextobjectid="50">
+ <objectgroup color="#2a363b" name="level">
+  <object id="22" type="wall" x="432" y="544" width="192" height="16"/>
+  <object id="23" type="wall" x="416" y="544" width="16" height="128"/>
+  <object id="25" name="player" x="512" y="592" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="29" name="goal" x="608" y="560" width="16" height="32"/>
+  <object id="39" type="wall" x="432" y="656" width="192" height="16"/>
+  <object id="41" type="wall" x="624" y="544" width="16" height="128"/>
+  <object id="42" type="wall" x="576" y="592" width="48" height="16"/>
+  <object id="43" type="coin" x="599" y="611" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="44" type="coin" x="599" y="627" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="45" type="coin" x="599" y="643" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="46" type="coin" x="439" y="562" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="47" type="coin" x="439" y="578" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="48" type="coin" x="439" y="594" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="49" type="text" x="416" y="680" width="256" height="32">
+   <properties>
+    <property name="text" value="Easy Pickings"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -13,7 +13,7 @@ object Sounds : Disposable {
     var soundMuted = false
 
     override fun dispose() {
-        music.dispose()
+        //music.dispose()
         bounce.dispose()
         dead.dispose()
         coin.dispose()

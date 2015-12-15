@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\net.dermetfan.libgdx-utils\libgdx-utils\0.13.2\62b7ab4f643c6b396292d1f2387c0099d28102ba\libgdx-utils-0.13.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="62b7ab4f643c6b396292d1f2387c0099d28102ba">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\libgdx-utils-0.13.2-41f84e79f4fe341642e898aca1924e5d60429ce2.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.7.1\454871d4783564f17959bf9247660e7f56ecc4ab\gdx-backend-android-1.7.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="454871d4783564f17959bf9247660e7f56ecc4ab">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\gdx-backend-android-1.7.1-ba8972e2202f6d478149b11b27d569e72ca53c23.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.7.1\2179cc613447c297623a4a6d2ba6692c3aaff804\gdx-1.7.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2179cc613447c297623a4a6d2ba6692c3aaff804">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\gdx-1.7.1-dd984288636b9fb035d3dda648c8d53a17343b13.jar" />
+    </item>
+    <item
+        jar="C:\src\ludum-dare-34\core\build\libs\core-1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fe0c71069b6bb760fc4ef4b598376c48daff3b20">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\core-1.0-fa298c88c245e54d1f85b5009d8718920e2f4526.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.7.1\fd23897393900f8f888222795e3229eff600fb3d\gdx-box2d-1.7.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fd23897393900f8f888222795e3229eff600fb3d">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\gdx-box2d-1.7.1-642f6cfeb62c423e2af4b6eea12390f6a68d2d66.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\com.badlogicgames.ashley\ashley\1.7.0\a7c4083c0a42027a3c03ba7ccecef6cbe1c5f0a4\ashley-1.7.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a7c4083c0a42027a3c03ba7ccecef6cbe1c5f0a4">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\ashley-1.7.0-891c0f16ace70680537d666b83ae4f4c6f07e8e3.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\net.dermetfan.libgdx-utils\libgdx-utils-box2d\0.13.2\cb22af5b48e5dbe82a4f0704e5ddf360e1d1c9d6\libgdx-utils-box2d-0.13.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="cb22af5b48e5dbe82a4f0704e5ddf360e1d1c9d6">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\libgdx-utils-box2d-0.13.2-27db678a5f9e407baab67666603f173d22231602.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.0.0-beta-3595\fa058466a7ed0b393db7868986b603706968ee2b\kotlin-stdlib-1.0.0-beta-3595.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fa058466a7ed0b393db7868986b603706968ee2b">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\kotlin-stdlib-1.0.0-beta-3595-054992275a3a4fe9e986bba0641183f14f0f2e70.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-runtime\1.0.0-beta-3595\5f3e80245f4d8a42370eb53a5fd65721d02236cd\kotlin-runtime-1.0.0-beta-3595.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5f3e80245f4d8a42370eb53a5fd65721d02236cd">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\kotlin-runtime-1.0.0-beta-3595-7a3cd4f4b28664ddb8272699993fcd2200e312b0.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-ai\1.6.0\a1a3b25a3485affab88be13ab8c1a920537f7d8c\gdx-ai-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a1a3b25a3485affab88be13ab8c1a920537f7d8c">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\gdx-ai-1.6.0-182e0b6ef2f6f8188685891585c62cd8cc39d5be.jar" />
+    </item>
+    <item
+        jar="C:\Users\matth\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-freetype\1.7.1\af361631aeda42eab0f9fc83e5f48a93df459766\gdx-freetype-1.7.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="af361631aeda42eab0f9fc83e5f48a93df459766">
+        <dex dex="C:\src\ludum-dare-34\android\build\intermediates\pre-dexed\debug\gdx-freetype-1.7.1-7e6b7de0c2f9d72e66797ce95c9509f06ab36435.jar" />
+    </item>
+
+</items>
